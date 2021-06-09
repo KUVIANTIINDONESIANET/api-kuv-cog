@@ -298,6 +298,8 @@ router.get('/tiktod', async (req, res, next) => {
      if (!url) return res.json(loghandler.noturl)
 
      TikTokScraper.getVideoMeta(url, options)
+     fetch(encodeURI(`https://yudaapikey.herokuapp.com/api/download/tiktok?url=${url}&apikey=YudaGans`))
+        .then(response => response.json())
          .then(vid => {
              console.log(vid)
              res.json({
@@ -321,7 +323,10 @@ router.get('/tiktod/stalk', async (req, res, next) => {
 
 
     TikTokScraper.getUserProfileInfo(username)
+    fetch(encodeURI(`https://yudaapikey.herokuapp.com/api/stalk/tiktok?apikey=YudaGans&username=${user}`))
+        .then(response => response.json())
         .then(user => {
+        var result = data;
             res.json({
                 status : true,
                 creator : `${creator}`,
